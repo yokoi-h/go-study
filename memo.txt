@@ -1,0 +1,85 @@
+## Go memo
+
+### pointer
+
+### receiver
+
+### slice
+以下のように宣言する。
+```
+var s []string
+// append
+s = append(s, "a")
+
+// append other slice
+var t []string
+t = append(t, "b")
+s = append(s, t)
+
+// scan
+for index, str := range s {
+	fmt.Println(index, " ", str)
+}
+
+
+### map
+以下のように宣言する。
+```Go
+var m map[int]string
+m = map[int]string{}
+// or
+m = map[int]string{1: "a", 2:"b"}
+
+// contains
+_, ok = m[2]
+if ok {
+	// do something
+}
+
+// scan
+for key, value := range m {
+	fmt.Println(key)
+	fmt.Println(value)
+}
+```
+
+要素の削除は以下のように行う。
+```
+delete(m, 1)
+```
+
+### defer execution
+
+
+
+### receiver
+
+Calls: A method call x.m() is valid if the method set of (the type of) x contains m and the argument list can be assigned to the parameter list of m. If x is addressable and &x's method set contains m, x.m() is shorthand for (&x).m().
+
+if there is method for a receiver, we can call the method fot value receiver.
+shorthand 
+receiv.aaa()
+-> (&receiv).aaa()
+
+A type may have a method set associated with it.
+The method set of an interface type is its interface.
+The method set of any other named type T consists of all methods with receiver type T.
+The method set of the corresponding pointer type *T is the set of all methods with receiver *T or T
+(that is, it also contains the method set of T).
+Any other type has an empty method set. In a method set, each method must have a unique name.
+
+To make it easier to remember these rules, 
+it may be helpful to simply consider the pointer- and value-receiver methods separately from the method set.
+It is legal to call a pointer-valued method on anything that is already a pointer or whose address can be taken (as is the case in the above example).
+It is legal to call a value method on anything which is a value or whose value can be dereferenced (as is the case with any pointer; this case is specified explicitly in the spec).
+
+
+func Dog Speak()
+invoke with *dog  -> OK
+
+func *Dog Speak()
+invoke with dog -> ?? This works because a pointer type can access the methods of its associated value type
+it's OK
+
+
+
